@@ -21,7 +21,6 @@
 #include <ctype.h>
 #include <string.h>
 #define LINE 5
-#define TRUE 1
 
 /*Define a pointer to the input function that receives a 'char' type
   as an input from the user. */
