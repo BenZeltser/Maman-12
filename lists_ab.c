@@ -21,6 +21,7 @@
 #include <ctype.h>
 #include <string.h>
 #define LINE 5
+#define TRUE 1
 
 /*Define a pointer to the input function that receives a 'char' type
   as an input from the user. */
@@ -35,14 +36,15 @@ int main() {
 char* inputString;
 char* outputString;
 int printLines(char* string);
+/*Message the user for input*/
+printf("Hello :-) Please enter a string: \n");
+/*Continue to prompt the user until CTRL+Z is entered */
 /*Init inputString */
 inputString = '\0';
 outputString = input(inputString);
 printLines(outputString);
 
-return 0;
-
-}
+return 0;}
 
 /*Section B */
 
@@ -55,12 +57,11 @@ char* input(char *string) {
     int temp,i,counter;
     string = malloc(sizeof(char));
     counter = 0;
+    temp = getchar();
     /*Set initially first char as NULL char*/
     string[0] = '\0';
-    /*Message the user for input*/
-    printf("Hello. please enter a string: \n");
     /*Iterate through the file*/
-    for (i=0; (temp=getchar())!= '\n' && temp!=EOF; i++) {
+    for (i=0;temp!=EOF; i++) {
     /*Reallocate memory for 'string' for further incoming user input*/
         string = realloc(string, (i+2)*sizeof(char));
     /*Store the given input from the user inside the string*/
@@ -70,14 +71,15 @@ char* input(char *string) {
     /*Check if the current char is alphanumeric*/
         if(isalnum(temp)) {
             counter = counter+1;}
+    /*set temp as the current character */
+        temp = getchar();
     }
-
-    printf("\nSection B: \n");
-    printf("Total characters entered: %d \n", strlen(string));
-    printf("Number of Alphanumeric symbols entered: %d \n\n", counter);
+    printf("\nTotal characters entered: %d \n", strlen(string));
+    printf("Number of Alphanumeric characters entered: %d \n", counter);
     /*finished using the pointer. now we will free the memory. */
 
     return string;
+    /*Free the memory when finished it's usage.*/
     free(string);
 }
 
@@ -89,16 +91,17 @@ int i,length;
 'i' - running index.
 'length' - represents the size of 'string'. */
 
-printf("Section A:");
+printf("\nBounded String:");
 /*Here we will define a counter.
-if the counter is divisable by LINE (size)
 then we will go to a new line*/
 
 length = strlen(string);
 
 for (i=0; i<length; i++) {
+/*if the counter is divisable by LINE (size) then start a new line */
     if (i%LINE == 0) {
         printf("\n");}
+/*print the next character */
     printf("%c", string[i]);
 }
 printf("\n");
